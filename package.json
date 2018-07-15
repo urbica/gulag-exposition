@@ -1,0 +1,51 @@
+{
+  "name": "exposition",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "cz": "git-cz",
+    "precommit": "lint-staged",
+    "lint": "eslint src --ext .js,.jsx",
+    "release": "standard-version"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx}": [
+      "prettier-eslint --write",
+      "npm run lint --fix",
+      "git add"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "devDependencies": {
+    "babel-eslint": "8.2.6",
+    "commitizen": "2.10.1",
+    "cz-conventional-changelog": "2.1.0",
+    "eslint": "5.1.0",
+    "eslint-config-airbnb": "17.0.0",
+    "eslint-config-prettier": "2.9.0",
+    "eslint-plugin-import": "2.13.0",
+    "eslint-plugin-jsx-a11y": "6.1.1",
+    "eslint-plugin-react": "7.10.0",
+    "husky": "0.14.3",
+    "lint-staged": "7.2.0",
+    "prettier": "1.13.7",
+    "prettier-eslint": "8.8.2",
+    "prettier-eslint-cli": "4.7.1",
+    "standard-version": "4.4.0"
+  },
+  "dependencies": {
+    "normalize.css": "8.0.0",
+    "react": "16.4.1",
+    "react-dom": "16.4.1",
+    "react-scripts": "1.1.4",
+    "styled-components": "3.3.3"
+  }
+}
