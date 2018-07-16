@@ -4,6 +4,7 @@
 * [standard-version](https://github.com/conventional-changelog/standard-version)
 * react
 * styled-components
+* redux
 
 ## Commit
 ```

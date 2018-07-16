@@ -42,10 +42,23 @@
     "standard-version": "4.4.0"
   },
   "dependencies": {
+    "create-immutable-selector": "1.0.0",
+    "history": "4.7.2",
+    "immutable": "4.0.0-rc.9",
     "normalize.css": "8.0.0",
     "react": "16.4.1",
     "react-dom": "16.4.1",
+    "react-intl": "2.4.0",
+    "react-intl-redux": "2.0.0",
+    "react-redux": "5.0.7",
+    "react-router-redux": "5.0.0-alpha.9",
     "react-scripts": "1.1.4",
+    "redux": "4.0.0",
+    "redux-immutable": "4.0.0",
+    "redux-logger": "3.0.6",
+    "redux-saga": "0.16.0",
+    "reselect": "3.0.1",
     "styled-components": "3.3.3"
-  }
+  },
+  "proxy": "https://gulag.urbica.co"
 }
