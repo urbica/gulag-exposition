@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 // globalStyles
 import './globalStyles';
 
+// components
+import Map from '../Map';
+
 const App = () => (
-  <div>
-    App
-  </div>
+  <Fragment>
+    <Map />
+  </Fragment>
 );
 
 export default App;
