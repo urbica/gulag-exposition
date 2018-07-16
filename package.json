@@ -60,5 +60,6 @@
     "reselect": "3.0.1",
     "styled-components": "3.3.3"
   },
+  "homepage": "/exposition",
   "proxy": "https://gulag.urbica.co"
 }
