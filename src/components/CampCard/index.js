@@ -6,16 +6,8 @@ import { branch, compose, renderNothing } from 'recompose';
 // selectors
 import { localeSelector } from '../App/reducers/intlReducer';
 import { campSelector, activitiesSelector } from '../App/reducers/dataReducer';
-import {
-  currentYearSelector,
-  campTypeFiltersSelector
-} from '../App/reducers/uiReducer';
 
 // actions
-import {
-  toggleCampTypeFilters,
-  changeCurrentYear
-} from '../App/reducers/uiActions';
 import { changeViewport } from '../App/reducers/mapActions';
 
 import CampCard from './CampCard';
@@ -24,22 +16,15 @@ const mapStateToProps = createImmutableSelector(
   localeSelector,
   campSelector,
   activitiesSelector,
-  currentYearSelector,
-  campTypeFiltersSelector,
-  (lang, camp, activities, currentYear, campTypeFilters) => ({
+  (lang, camp, activities) => ({
     lang,
     camp,
-    activities,
-    currentYear,
-    campTypeFilters
+    activities
   })
 );
 const mapDispatchToProps = dispatch => ({
   closeCard: () => dispatch(push('/')),
-  changeViewport: newViewport => dispatch(changeViewport(newViewport)),
-  changeCurrentYear: newYear => dispatch(changeCurrentYear(newYear)),
-  openCard: url => dispatch(push(`/${url}`)),
-  toggleCampTypeFilters: id => dispatch(toggleCampTypeFilters(id))
+  changeViewport: newViewport => dispatch(changeViewport(newViewport))
 });
 
 const withConnect = connect(

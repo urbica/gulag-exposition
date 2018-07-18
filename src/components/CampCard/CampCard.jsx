@@ -28,13 +28,13 @@ import Gallery from './styled/Gallery';
 
 const getList = arr =>
   arr.get('photos').map((photo, i) => ({
-    src: photo.get('path'),
     'title-ru': photo.getIn(['title', 'ru']),
     'title-en': photo.getIn(['title', 'en']),
     'title-de': photo.getIn(['title', 'de']),
     'description-ru': photo.getIn(['description', 'ru']),
     'description-en': photo.getIn(['description', 'en']),
     'description-de': photo.getIn(['description', 'de']),
+    src: photo.get('path'),
     count: i
   }));
 
@@ -45,14 +45,7 @@ class CampCard extends PureComponent {
   };
 
   componentDidMount() {
-    const {
-      currentYear,
-      camp,
-      changeCurrentYear,
-      campTypeFilters,
-      toggleCampTypeFilters,
-      changeViewport
-    } = this.props;
+    const { camp, changeViewport } = this.props;
 
     const coordinates = camp
       .getIn(['locations', 0, 'geometry', 'coordinates'])
@@ -61,30 +54,15 @@ class CampCard extends PureComponent {
       latitude: coordinates[1],
       longitude: coordinates[0]
     };
-    const campYears = camp
-      .get('locations')
-      .flatMap(location => location.get('statistics'))
-      .map(statistics => statistics.get('year'));
 
     const links = document.querySelectorAll('#campDescription a');
     links.forEach(link => link.addEventListener('click', this.linkOnClick));
 
-    if (!campTypeFilters.get(camp.get('typeId').toString())) {
-      toggleCampTypeFilters(camp.get('typeId').toString());
-    }
-
-    if (!campYears.includes(currentYear)) {
-      changeCurrentYear(campYears.first());
-    }
     changeViewport(newViewport);
   }
 
   linkOnClick = event => {
-    const { openCard } = this.props;
-
     event.preventDefault();
-    window.scrollTo(0, 0);
-    openCard(event.target.href.match(/camp\d+/)[0]);
   };
 
   handleOpen = e => {
@@ -203,13 +181,8 @@ CampCard.propTypes = {
   camp: PropTypes.instanceOf(Map).isRequired,
   lang: PropTypes.string.isRequired,
   closeCard: PropTypes.func.isRequired,
-  openCard: PropTypes.func.isRequired,
   activities: PropTypes.instanceOf(Map).isRequired,
-  changeViewport: PropTypes.func.isRequired,
-  currentYear: PropTypes.number.isRequired,
-  changeCurrentYear: PropTypes.func.isRequired,
-  campTypeFilters: PropTypes.instanceOf(Map).isRequired,
-  toggleCampTypeFilters: PropTypes.func.isRequired
+  changeViewport: PropTypes.func.isRequired
 };
 
 export default CampCard;

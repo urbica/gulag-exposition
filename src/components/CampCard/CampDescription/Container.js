@@ -17,22 +17,8 @@ export default styled.div`
   }
 
   a {
-    display: inline-block;
-    padding-bottom: 2px;
-    border-bottom: 4px solid ${mainFontColour};
-    margin-bottom: 10px;
-
-    line-height: 22px;
     color: ${mainFontColour};
     text-decoration: none;
-
-    transition: 0.4s;
-
-    &:hover {
-      border-bottom: 4px solid transparent;
-
-      transition: 0.4s;
-    }
   }
 
   img {
