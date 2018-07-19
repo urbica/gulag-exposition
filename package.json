@@ -42,6 +42,7 @@
     "standard-version": "4.4.0"
   },
   "dependencies": {
+    "@gulag/ui-kit": "git+ssh://git@gitlab.urbica.co:2222/gulag/ui-kit.git#3ae70118",
     "@urbica/react-map-gl": "0.6.0-beta.14",
     "commonmark": "0.28.1",
     "create-immutable-selector": "1.0.0",
