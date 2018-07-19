@@ -5,6 +5,12 @@ stages:
 test:
   stage: test
   image: node:alpine
+  before_script:
+    - apk add --no-cache git openssh
+    - mkdir -p ~/.ssh
+    - echo "$SSH_PRIVATE_KEY" >> ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
   script:
     - NODE_ENV=development npm i
     - NODE_ENV=development npm run lint
