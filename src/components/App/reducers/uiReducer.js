@@ -8,7 +8,6 @@ import * as uiActions from './uiActions';
 // initial state
 export const initState = fromJS({
   currentYear: 1937,
-  isMenuOpen: false,
   isDataLoading: true,
   isCampFiltersOpen: false,
   campTypeFilters: {
@@ -26,18 +25,12 @@ const uiSelector = createImmutableSelector(state => state.get('ui'), ui => ui);
 export const currentYearSelector = createImmutableSelector(uiSelector, ui =>
   ui.get('currentYear')
 );
-export const isMenuOpenSelector = createImmutableSelector(uiSelector, ui =>
-  ui.get('isMenuOpen')
-);
 export const isCampFiltersOpenSelector = createImmutableSelector(
   uiSelector,
   ui => ui.get('isCampFiltersOpen')
 );
 export const campTypeFiltersSelector = createImmutableSelector(uiSelector, ui =>
   ui.get('campTypeFilters')
-);
-export const isDataLoadingSelector = createImmutableSelector(uiSelector, ui =>
-  ui.get('isDataLoading')
 );
 
 // reducer
@@ -50,10 +43,7 @@ export default (state = initState, { type, payload }) => {
     case uiActions.CURRENT_YEAR_CHANGED:
       return state
         .set('currentYear', parseInt(payload, 10))
-        .set('isMenuOpen', false)
         .set('isCampFiltersOpen', false);
-    case uiActions.MENU_TOGGLED:
-      return state.set('isMenuOpen', !state.get('isMenuOpen'));
     case uiActions.CAMP_FILTERS_TOGGLED:
       return state.set('isCampFiltersOpen', !state.get('isCampFiltersOpen'));
     case uiActions.CAMP_FILTER_TOGGLED:
@@ -62,7 +52,7 @@ export default (state = initState, { type, payload }) => {
         !state.getIn(['campTypeFilters', payload])
       );
     case uiActions.CLOSE_MENUS:
-      return state.set('isMenuOpen', false).set('isCampFiltersOpen', false);
+      return state.set('isCampFiltersOpen', false);
     default:
       return state;
   }

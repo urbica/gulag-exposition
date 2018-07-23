@@ -7,13 +7,17 @@ import './globalStyles';
 
 // components
 import Map from '../Map';
+import Menu from '../Menu';
 import BottomPanel from '../BottomPanel';
+import CampFilters from '../CampFilters';
 import CampCard from '../CampCard';
 
 const App = () => (
   <Fragment>
     <Map />
+    <Menu />
     <BottomPanel />
+    <CampFilters />
     <Route
       path='/camp:id'
       render={props => <CampCard key={props.match.params.id} {...props} />}

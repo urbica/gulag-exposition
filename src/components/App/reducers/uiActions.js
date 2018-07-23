@@ -4,9 +4,6 @@ export const changeCurrentYear = year => ({
   payload: year
 });
 
-export const MENU_TOGGLED = '@@ui/MENU_TOGGLED';
-export const toggleMenu = () => ({ type: MENU_TOGGLED });
-
 export const CAMP_FILTERS_TOGGLED = '@@ui/CAMP_FILTERS_TOGGLED';
 export const toggleCampFilters = () => ({ type: CAMP_FILTERS_TOGGLED });
 

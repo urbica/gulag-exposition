@@ -42,7 +42,7 @@
     "standard-version": "4.4.0"
   },
   "dependencies": {
-    "@gulag/ui-kit": "git+ssh://git@gitlab.urbica.co:2222/gulag/ui-kit.git#3ae70118",
+    "@gulag/ui-kit": "git+ssh://git@gitlab.urbica.co:2222/gulag/ui-kit.git#2b4ff73",
     "@urbica/react-map-gl": "0.6.0-beta.14",
     "commonmark": "0.28.1",
     "create-immutable-selector": "1.0.0",
@@ -60,17 +60,19 @@
     "react-dom": "16.4.1",
     "react-intl": "2.4.0",
     "react-intl-redux": "2.0.0",
+    "redux-logger": "3.0.6",
     "react-redux": "5.0.7",
     "react-router-dom": "4.3.1",
     "react-router-redux": "5.0.0-alpha.9",
     "react-scripts": "1.1.4",
+    "react-transition-group": "^2.4.0",
     "recompose": "0.27.1",
     "redux": "4.0.0",
     "redux-immutable": "4.0.0",
-    "redux-logger": "3.0.6",
     "redux-saga": "0.16.0",
     "reselect": "3.0.1",
-    "styled-components": "3.3.3"
+    "styled-components": "3.3.3",
+    "styled-transition-group": "^1.0.0"
   },
   "homepage": "/exposition",
   "proxy": "https://gulag.urbica.co"
