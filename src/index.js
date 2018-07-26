@@ -24,7 +24,7 @@ import mapReducer from './components/App/reducers/mapReducer';
 
 //
 import Saga from './components/App/saga';
-import App from './components/App';
+import App from './components/App/App';
 
 const reducer = combineReducers({
   data: dataReducer,

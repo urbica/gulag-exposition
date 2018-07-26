@@ -65,14 +65,14 @@
     "react-router-dom": "4.3.1",
     "react-router-redux": "5.0.0-alpha.9",
     "react-scripts": "1.1.4",
-    "react-transition-group": "^2.4.0",
+    "react-transition-group": "2.4.0",
     "recompose": "0.27.1",
     "redux": "4.0.0",
     "redux-immutable": "4.0.0",
     "redux-saga": "0.16.0",
     "reselect": "3.0.1",
     "styled-components": "3.3.3",
-    "styled-transition-group": "^1.0.0"
+    "styled-transition-group": "1.0.0"
   },
   "homepage": "/exposition",
   "proxy": "https://gulag.urbica.co"

@@ -12,6 +12,8 @@ export default transition.div`
 
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
+  
+  z-index: 2;
 
   &:enter {
     left: -400px;
@@ -31,28 +33,5 @@ export default transition.div`
     left: -400px;
 
     transition: left 250ms ease-in-out;
-  }
-
-  @media (max-width: 600px) {
-    width: 100%;
-    left: ${({ isCampFiltersOpen }) => (isCampFiltersOpen ? 0 : '-100%')};
-    padding-left: 10vw;
-    padding-right: 10vw;
-
-    &:enter {
-      left: -100%;
-    }
-
-    &:enter-active {
-      left: 0;
-    }
-
-    &:exit {
-      left: 0;
-    }
-
-    &:exit-active {
-      left: -100%;
-    }
   }
 `;
