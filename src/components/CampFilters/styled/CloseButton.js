@@ -5,12 +5,8 @@ export default styled.button`
   border: none;
   margin: 0;
   background-color: transparent;
-  cursor: pointer;
-  transition: 0.5s;
 
-  &:hover {
-    opacity: 0.8;
-  }
+  transition: 0.5s;
 
   &:focus {
     outline: none;

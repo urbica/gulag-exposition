@@ -1,21 +1,19 @@
 import React from 'react';
+import { Filter } from '@gulag/ui-kit';
 import PropTypes from 'prop-types';
 import { Map } from 'immutable';
+
 import { t } from '../../intl/helper';
+import campsColors from '../../config/campsColors';
 
 // icon
 import cross from '../cross.svg';
 
 // styled
-import Container from './Container';
-import Top from './Top';
-import Title from './Title';
-import CloseButton from './BackButton';
-import Filter from './Filter';
-import FilterTop from './FilterTop';
-import FilterTitle from './FilterTitle';
-import Switcher from './Switcher';
-import Description from './Description';
+import Container from './styled/Container';
+import Top from './styled/Top';
+import Title from './styled/Title';
+import CloseButton from './styled/CloseButton';
 
 const CampFilters = props => {
   const {
@@ -46,19 +44,19 @@ const CampFilters = props => {
         const typeId = type.get('id').toString();
         const isActive = campTypeFilters.get(typeId);
         const toggleFilterHandler = () => toggleFilter(typeId);
+        const filter = {
+          title: type.getIn(['title', locale]),
+          description: type.getIn(['description', locale]),
+          isActive,
+          color: campsColors[type.get('id')]
+        };
 
         return (
-          <Filter key={type.get('id')} onClick={toggleFilterHandler}>
-            <FilterTop>
-              <FilterTitle isActive={isActive}>
-                {type.getIn(['title', locale])}
-              </FilterTitle>
-              <Switcher typeId={type.get('id')} isActive={isActive} />
-            </FilterTop>
-            <Description isActive={isActive}>
-              {type.getIn(['description', locale])}
-            </Description>
-          </Filter>
+          <Filter
+            key={type.get('id')}
+            data={filter}
+            onChange={toggleFilterHandler}
+          />
         );
       })}
     </Container>
