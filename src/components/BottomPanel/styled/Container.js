@@ -10,4 +10,17 @@ export default styled.div`
 
   pointer-events: none;
   z-index: 1;
+  
+  // this after element is need to prevent click on mapbox logo   
+  &:after {
+    content: '';
+
+    position: absolute;
+    bottom: 0;
+
+    width: 100%;
+    height: 30px;
+
+    pointer-events: auto;
+  }
 `;
