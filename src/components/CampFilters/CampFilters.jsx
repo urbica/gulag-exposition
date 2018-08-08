@@ -1,7 +1,7 @@
 import React from 'react';
 import { Filter } from '@gulag/ui-kit';
 import PropTypes from 'prop-types';
-import { Map } from 'immutable';
+import { List, Map } from 'immutable';
 
 import { t } from '../../intl/helper';
 import campsColors from '../../config/campsColors';
@@ -64,7 +64,7 @@ const CampFilters = props => {
 };
 
 CampFilters.propTypes = {
-  types: PropTypes.instanceOf(Map).isRequired,
+  types: PropTypes.instanceOf(List).isRequired,
   isCampFiltersOpen: PropTypes.bool.isRequired,
   closeCampFilters: PropTypes.func.isRequired,
   campTypeFilters: PropTypes.instanceOf(Map).isRequired,
