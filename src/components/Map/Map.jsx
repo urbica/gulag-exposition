@@ -30,7 +30,8 @@ class Map extends PureComponent {
   };
 
   state = {
-    layers: layersConfig
+    layers: layersConfig,
+    isMapLoaded: false
   };
 
   componentDidMount() {
@@ -40,7 +41,11 @@ class Map extends PureComponent {
   }
 
   componentDidUpdate() {
-    this.translateLayers();
+    const { isMapLoaded } = this.state;
+
+    if (isMapLoaded) {
+      this.translateLayers();
+    }
   }
 
   onMapClick = e => {
@@ -133,6 +138,10 @@ class Map extends PureComponent {
     openCampCard(campId);
   };
 
+  mapOnLoad = () => {
+    this.setState({ isMapLoaded: true });
+  };
+
   render() {
     const { layers } = this.state;
     const { isSlideUp, viewport, changeViewport, campsSource } = this.props;
@@ -147,6 +156,7 @@ class Map extends PureComponent {
           ref={this.mapGlRef}
           style={{ width: '100%', height: '100%' }}
           onViewportChange={changeViewport}
+          onLoad={this.mapOnLoad}
           {...mapConfig}
           {...viewport.toJS()}
         >

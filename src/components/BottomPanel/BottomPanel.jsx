@@ -26,7 +26,7 @@ class BottomPanel extends PureComponent {
     // e.axis changed to value e.value for gamepad e.gamepad
     const { currentYear, changeCurrentYear } = this.props;
     // 0.02380952381 is scale interval
-    const year = Math.round(e.value / 0.02380952381 + 1918);
+    const year = Math.round(e.value / 0.001268666667 + 2706);
 
     if (currentYear === year) return;
 
@@ -60,7 +60,7 @@ class BottomPanel extends PureComponent {
         <ChartStat stats={stats} />
         <Chart
           data={chartData}
-          width={1200}
+          width={1140}
           height={200}
           margin={margin}
           value={currentYear}
