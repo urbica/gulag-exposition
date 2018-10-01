@@ -8,6 +8,7 @@ import './globalStyles';
 // components
 import Map from '../Map';
 import Menu from '../Menu';
+import Languages from '../Languages';
 import BottomPanel from '../BottomPanel';
 import CampFilters from '../CampFilters';
 import CampCard from '../CampCard';
@@ -16,6 +17,7 @@ const App = () => (
   <Fragment>
     <Map />
     <Menu />
+    <Languages />
     <BottomPanel />
     <CampFilters />
     <Route
