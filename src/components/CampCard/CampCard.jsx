@@ -76,8 +76,8 @@ class CampCard extends PureComponent {
     const { isOpened } = this.state;
 
     if (isOpened) {
-      document.body.style.position = 'absolute';
-      document.body.style.height = '100vh';
+      document.body.style.position = '';
+      document.body.style.height = '';
     } else {
       document.body.style.position = 'fixed';
       document.body.style.height = 'initial';
@@ -117,21 +117,15 @@ class CampCard extends PureComponent {
     return (
       <Container>
         <Top>
-          <h1>
-            {camp.getIn(['title', lang])}
-          </h1>
-          <Location>
-            {camp.getIn(['subTitles', lang])}
-          </Location>
+          <h1>{camp.getIn(['title', lang])}</h1>
+          <Location>{camp.getIn(['subTitles', lang])}</Location>
           <CardButton onClick={closeCard}>
             <img src={cross} alt='cross' />
           </CardButton>
         </Top>
         <Left>
           <HalfWidth>
-            <Subtitle>
-              {activity ? t('prisonCard.production') : ''}
-            </Subtitle>
+            <Subtitle>{activity ? t('prisonCard.production') : ''}</Subtitle>
             <div>
               {activities.getIn([camp.get('activityId'), 'title', lang])}
             </div>
@@ -140,16 +134,12 @@ class CampCard extends PureComponent {
           <CampDescription markup={markup} />
         </Left>
         <Right>
-          <Subtitle>
-            {t('prisonCard.prisonersByYears')}
-          </Subtitle>
+          <Subtitle>{t('prisonCard.prisonersByYears')}</Subtitle>
           <PrisonChart locations={camp.get('locations')} lang={lang} />
         </Right>
         {camp.get('photos').size > 0 && (
           <Bottom>
-            <Subtitle>
-              {t('prisonCard.photo')}
-            </Subtitle>
+            <Subtitle>{t('prisonCard.photo')}</Subtitle>
             <Gallery onMouseDown={this.handleOpen} role='presentation'>
               {getList(camp).map(photo => (
                 <img

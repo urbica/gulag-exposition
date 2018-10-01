@@ -57,7 +57,9 @@ class BottomPanel extends PureComponent {
 
     return (
       <Container>
-        <ChartStat stats={stats} />
+        <div style={{ position: 'absolute', left: 0 }}>
+          <ChartStat stats={stats} />
+        </div>
         <Chart
           data={chartData}
           width={1140}
