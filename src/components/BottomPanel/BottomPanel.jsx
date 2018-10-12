@@ -10,6 +10,15 @@ import { margin, chartData } from './config';
 // styled
 import Container from './styled/Container';
 
+const minScale = -1;
+const maxScale = 1;
+const shiftScale = 1;
+const minYear = 1918;
+const maxYear = 1960;
+
+const coefficient =
+  (maxYear - minYear) / (maxScale + shiftScale - (minScale + shiftScale));
+
 class BottomPanel extends PureComponent {
   static propTypes = {
     currentYear: PropTypes.number.isRequired,
@@ -25,12 +34,14 @@ class BottomPanel extends PureComponent {
   gamepadOnChange = e => {
     // e.axis changed to value e.value for gamepad e.gamepad
     const { currentYear, changeCurrentYear } = this.props;
-    // 0.02380952381 is scale interval
-    const year = Math.round(e.value / 0.001268666667 + 2706);
+
+    // if (e.axis === 'RIGHT_STICK_Y') {
+    const year = Math.round(minYear + (e.value + shiftScale) * coefficient);
 
     if (currentYear === year) return;
 
     changeCurrentYear(year);
+    // }
   };
 
   render() {
