@@ -93,12 +93,16 @@ class Map extends PureComponent {
     const citiesNames = `{historical_name${lang === 'ru' ? '' : '_en'}}`;
     const activeCampHaloFilter = List([
       'all',
-      ['==', 'campId', parseInt(campId, 10)]
+      ['==', 'campId', parseInt(campId, 10)],
+      ['==', 'year', currentYear]
     ]);
     const activeCampNameFilter = List([
       'all',
-      ['==', 'campId', parseInt(campId, 10)]
+      ['==', 'campId', parseInt(campId, 10)],
+      ['==', 'year', currentYear]
     ]);
+    const campsFilter = List(['all', ['==', 'year', currentYear]]);
+    const campsHaloFilter = List(['all', ['==', 'year', currentYear]]);
 
     const updatedLayers = prevState.layers
       .setIn(['ussrBoundary', 'filter'], ussrBoundaryFilter)
@@ -106,7 +110,9 @@ class Map extends PureComponent {
       .setIn(['citiesDots', 'filter'], citiesFilter)
       .setIn(['cities', 'layout', 'text-field'], citiesNames)
       .setIn(['campHalo_active', 'filter'], activeCampHaloFilter)
-      .setIn(['campName_active', 'filter'], activeCampNameFilter);
+      .setIn(['campName_active', 'filter'], activeCampNameFilter)
+      .setIn(['camps', 'filter'], campsFilter)
+      .setIn(['campsHalo', 'filter'], campsHaloFilter);
 
     return { layers: updatedLayers };
   }

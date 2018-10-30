@@ -8,7 +8,6 @@ import emptyGeoJSONSource from '../../../utils/emptyGeoJSONSource';
 
 // selectors
 import { filteredCampsSelector } from './dataReducer';
-import { currentYearSelector } from './uiReducer';
 import { localeSelector } from './intlReducer';
 
 // action
@@ -28,16 +27,13 @@ export const viewportSelector = createImmutableSelector(mapSelector, map =>
 // TODO refactor campsSourceSelector
 export const campsSourceSelector = createImmutableSelector(
   filteredCampsSelector,
-  currentYearSelector,
   localeSelector,
-  (camps, currentYear, locale) => {
+  (camps, locale) => {
     const features = camps.reduce((accCamps, camp) => {
       const locations = camp
         .get('locations')
         .reduce((accLocations, location) => {
-          const statistics = location
-            .get('statistics')
-            .find(stat => stat.get('year') === currentYear);
+          const statistics = location.get('statistics');
 
           const feature = Map({
             type: 'Feature',
@@ -51,12 +47,13 @@ export const campsSourceSelector = createImmutableSelector(
 
           if (statistics === undefined) return accLocations;
 
-          const featureWithPeoples = feature.setIn(
-            ['properties', 'peoples'],
-            statistics.get('prisonersCount')
+          const featureWithPeoples = statistics.map(statistic =>
+            feature
+              .setIn(['properties', 'peoples'], statistic.get('prisonersCount'))
+              .setIn(['properties', 'year'], statistic.get('year'))
           );
 
-          return accLocations.push(featureWithPeoples);
+          return accLocations.merge(featureWithPeoples);
         }, List());
 
       return accCamps.merge(locations);

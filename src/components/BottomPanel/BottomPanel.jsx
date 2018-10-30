@@ -19,6 +19,15 @@ const maxYear = 1960;
 const coefficient =
   (maxYear - minYear) / (maxScale + shiftScale - (minScale + shiftScale));
 
+const chartStats = chartData.reduce((acc, { year, prisoners, dead }) => {
+  acc[year] = {
+    prisoners: prisoners > 0 ? splitDigits(prisoners) : t('noData'),
+    dead: dead > 0 ? splitDigits(dead) : t('noData')
+  };
+
+  return acc;
+}, {});
+
 class BottomPanel extends PureComponent {
   static propTypes = {
     currentYear: PropTypes.number.isRequired,
@@ -35,32 +44,34 @@ class BottomPanel extends PureComponent {
     // e.axis changed to value e.value for gamepad e.gamepad
     const { currentYear, changeCurrentYear } = this.props;
 
-    // if (e.axis === 'RIGHT_STICK_Y') {
+    // if (e.axis !== 'RIGHT_STICK_X') return;
     const year = Math.round(minYear + (e.value + shiftScale) * coefficient);
 
     if (currentYear === year) return;
 
     changeCurrentYear(year);
-    // }
   };
+
+  xFunc = d => d.year;
+
+  y1Func = d => d.dead;
+
+  y2Func = d => d.prisoners;
 
   render() {
     const { currentYear } = this.props;
-
-    const { prisoners, dead } = chartData.find(
-      ({ year }) => year === currentYear
-    );
+    const { prisoners, dead } = chartStats[currentYear];
 
     const stats = [
       {
         id: 'prisoners',
-        value: prisoners > 0 ? splitDigits(prisoners) : t('noData'),
+        value: prisoners,
         description: t('prisoners'),
         lineColor: '#e2f3e3'
       },
       {
         id: 'dead',
-        value: dead > 0 ? splitDigits(dead) : t('noData'),
+        value: dead,
         description: t('dead'),
         lineColor: '#ae2817'
       }
@@ -77,9 +88,9 @@ class BottomPanel extends PureComponent {
           height={200}
           margin={margin}
           value={currentYear}
-          x={d => d.year}
-          y1={d => d.dead}
-          y2={d => d.prisoners}
+          x={this.xFunc}
+          y1={this.y1Func}
+          y2={this.y2Func}
         />
       </Container>
     );
