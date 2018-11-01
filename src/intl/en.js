@@ -1,7 +1,7 @@
 export default {
   locale: 'en',
   messages: {
-    'menu.title': 'Gulag Map',
+    title: 'Gulag Map',
     showAllButton: 'Whole period',
     'prisonCard.yearsOfOperation': 'Years of operation',
     'prisonCard.location': 'Location',

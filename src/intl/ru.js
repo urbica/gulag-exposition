@@ -1,7 +1,7 @@
 export default {
   locale: 'ru',
   messages: {
-    'menu.title': 'Карта гулага',
+    title: 'Карта ГУЛАГа',
     showAllButton: 'Весь период',
     'prisonCard.yearsOfOperation': 'Годы существования',
     'prisonCard.location': 'Местоположение',

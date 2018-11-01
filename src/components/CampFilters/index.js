@@ -10,7 +10,10 @@ import {
 import { localeSelector } from '../App/reducers/intlReducer';
 
 // actions
-import { closeMenus, toggleCampTypeFilters } from '../App/reducers/uiActions';
+import {
+  toggleCampFilters,
+  toggleCampTypeFilters
+} from '../App/reducers/uiActions';
 
 import CampFilters from './CampFilters';
 
@@ -27,8 +30,8 @@ const mapStateToProps = createImmutableSelector(
   })
 );
 const mapDispatchToProps = dispatch => ({
-  closeCampFilters: () => dispatch(closeMenus()),
-  toggleFilter: id => dispatch(toggleCampTypeFilters(id))
+  toggleFilter: id => dispatch(toggleCampTypeFilters(id)),
+  toggleCampFilters: () => dispatch(toggleCampFilters())
 });
 
 export default connect(

@@ -6,59 +6,54 @@ import { List, Map } from 'immutable';
 import { t } from '../../intl/helper';
 import campsColors from '../../config/campsColors';
 
-// icon
-import cross from '../cross.svg';
-
 // styled
 import Container from './styled/Container';
 import Top from './styled/Top';
 import Title from './styled/Title';
-import CloseButton from './styled/CloseButton';
+import Button from './Button';
+import ContentWrapper from './ContentWrapper';
 
 const CampFilters = props => {
   const {
     types,
     isCampFiltersOpen,
-    closeCampFilters,
     campTypeFilters,
+    toggleCampFilters,
     toggleFilter,
     locale
   } = props;
 
   return (
-    <Container
-      mountOnEnter
-      isCampFiltersOpen={isCampFiltersOpen}
-      in={isCampFiltersOpen}
-      timeout={250}
-    >
-      <Top>
-        <Title>
-          {t('campFilters.title')}
-        </Title>
-        <CloseButton onClick={closeCampFilters}>
-          <img src={cross} alt='close' />
-        </CloseButton>
-      </Top>
-      {types.map(type => {
-        const typeId = type.get('id').toString();
-        const isActive = campTypeFilters.get(typeId);
-        const toggleFilterHandler = () => toggleFilter(typeId);
-        const filter = {
-          title: type.getIn(['title', locale]),
-          description: type.getIn(['description', locale]),
-          isActive,
-          color: campsColors[type.get('id')]
-        };
+    <Container isOpen={isCampFiltersOpen}>
+      <ContentWrapper>
+        <Top>
+          <Title>{t('campFilters.title')}</Title>
+        </Top>
+        {types.map(type => {
+          const typeId = type.get('id').toString();
+          const isActive = campTypeFilters.get(typeId);
+          const toggleFilterHandler = () => toggleFilter(typeId);
+          const filter = {
+            title: type.getIn(['title', locale]),
+            description: type.getIn(['description', locale]),
+            isActive,
+            color: campsColors[type.get('id')]
+          };
 
-        return (
-          <Filter
-            key={type.get('id')}
-            data={filter}
-            onChange={toggleFilterHandler}
-          />
-        );
-      })}
+          return (
+            <Filter
+              key={type.get('id')}
+              data={filter}
+              onChange={toggleFilterHandler}
+            />
+          );
+        })}
+      </ContentWrapper>
+      <Button onClick={toggleCampFilters} isOpen={isCampFiltersOpen}>
+        <div />
+        <div />
+        <div />
+      </Button>
     </Container>
   );
 };
@@ -66,7 +61,7 @@ const CampFilters = props => {
 CampFilters.propTypes = {
   types: PropTypes.instanceOf(List).isRequired,
   isCampFiltersOpen: PropTypes.bool.isRequired,
-  closeCampFilters: PropTypes.func.isRequired,
+  toggleCampFilters: PropTypes.func.isRequired,
   campTypeFilters: PropTypes.instanceOf(Map).isRequired,
   toggleFilter: PropTypes.func.isRequired,
   locale: PropTypes.string.isRequired
