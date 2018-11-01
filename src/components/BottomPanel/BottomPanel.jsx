@@ -9,6 +9,7 @@ import { margin, chartData } from './config';
 
 // styled
 import Container from './styled/Container';
+import Languages from './Languages';
 
 const minScale = -1;
 const maxScale = 1;
@@ -92,6 +93,7 @@ class BottomPanel extends PureComponent {
           y1={this.y1Func}
           y2={this.y2Func}
         />
+        <Languages />
       </Container>
     );
   }

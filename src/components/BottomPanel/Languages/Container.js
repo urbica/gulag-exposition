@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export default styled.div`
-  position: fixed;
-  top: 28px;
-  right: 23px;
+  align-self: flex-end;
+
+  margin-bottom: 30px;
+  margin-right: 20px;
 `;

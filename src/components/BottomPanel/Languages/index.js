@@ -2,10 +2,10 @@ import createImmutableSelector from 'create-immutable-selector';
 import { updateIntl } from 'react-intl-redux';
 import { connect } from 'react-redux';
 
-import { localeSelector } from '../App/reducers/intlReducer';
+import { localeSelector } from '../../App/reducers/intlReducer';
 
-import en from '../../intl/en';
-import ru from '../../intl/ru';
+import en from '../../../intl/en';
+import ru from '../../../intl/ru';
 
 import Languages from './Languages';
 
