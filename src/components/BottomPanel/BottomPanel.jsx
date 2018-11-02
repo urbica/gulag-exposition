@@ -2,38 +2,30 @@ import React, { PureComponent } from 'react';
 import { ChartStat, Chart } from '@gulag/ui-kit';
 import PropTypes from 'prop-types';
 
-import splitDigits from '../../utils/splitDigits';
 import { t } from '../../intl/helper';
-
-import { margin, chartData } from './config';
+import * as constants from '../../config/constants';
 
 // styled
-import Container from './styled/Container';
+import Container from './Container';
+import Left from './Left';
+import Middle from './Middle';
+import Right from './Right';
 import Languages from './Languages';
-
-const minScale = -1;
-const maxScale = 1;
-const shiftScale = 1;
-const minYear = 1918;
-const maxYear = 1960;
-
-const coefficient =
-  (maxYear - minYear) / (maxScale + shiftScale - (minScale + shiftScale));
-
-const chartStats = chartData.reduce((acc, { year, prisoners, dead }) => {
-  acc[year] = {
-    prisoners: prisoners > 0 ? splitDigits(prisoners) : t('noData'),
-    dead: dead > 0 ? splitDigits(dead) : t('noData')
-  };
-
-  return acc;
-}, {});
 
 class BottomPanel extends PureComponent {
   static propTypes = {
     currentYear: PropTypes.number.isRequired,
     changeCurrentYear: PropTypes.func.isRequired
   };
+
+  constructor(props) {
+    super(props);
+    const { search } = window.location;
+    const searchParams = new URLSearchParams(search);
+
+    this.left = searchParams.get('left');
+    this.width = Number.parseInt(searchParams.get('width'), 10);
+  }
 
   componentDidMount() {
     const gamepad = new Gamepad();
@@ -46,7 +38,10 @@ class BottomPanel extends PureComponent {
     const { currentYear, changeCurrentYear } = this.props;
 
     // if (e.axis !== 'RIGHT_STICK_X') return;
-    const year = Math.round(minYear + (e.value + shiftScale) * coefficient);
+    const year = Math.round(
+      constants.MIN_YEAR +
+        (e.value + constants.SHIFT_SCALE) * constants.COEFFICIENT
+    );
 
     if (currentYear === year) return;
 
@@ -61,8 +56,7 @@ class BottomPanel extends PureComponent {
 
   render() {
     const { currentYear } = this.props;
-    const { prisoners, dead } = chartStats[currentYear];
-
+    const { prisoners, dead } = constants.CHART_STATS[currentYear];
     const stats = [
       {
         id: 'prisoners',
@@ -80,20 +74,24 @@ class BottomPanel extends PureComponent {
 
     return (
       <Container>
-        <div style={{ position: 'absolute', left: 0 }}>
+        <Left>
           <ChartStat stats={stats} />
-        </div>
-        <Chart
-          data={chartData}
-          width={1140}
-          height={200}
-          margin={margin}
-          value={currentYear}
-          x={this.xFunc}
-          y1={this.y1Func}
-          y2={this.y2Func}
-        />
-        <Languages />
+        </Left>
+        <Middle left={this.left}>
+          <Chart
+            data={constants.CHART_DATA}
+            width={this.width}
+            height={200}
+            margin={constants.MARGIN}
+            value={currentYear}
+            x={this.xFunc}
+            y1={this.y1Func}
+            y2={this.y2Func}
+          />
+        </Middle>
+        <Right>
+          <Languages />
+        </Right>
       </Container>
     );
   }

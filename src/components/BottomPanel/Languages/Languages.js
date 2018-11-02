@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Container from './Container';
 import Button from './Button';
 
 const languages = {
@@ -9,11 +8,9 @@ const languages = {
 };
 
 const Languages = ({ updateIntlHandler, locale }) => (
-  <Container>
-    <Button type='button' onClick={updateIntlHandler(languages[locale])}>
-      {languages[locale]}
-    </Button>
-  </Container>
+  <Button type='button' onClick={updateIntlHandler(languages[locale])}>
+    {languages[locale]}
+  </Button>
 );
 
 Languages.propTypes = {

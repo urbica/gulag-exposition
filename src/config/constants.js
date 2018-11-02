@@ -1,11 +1,23 @@
-export const margin = {
-  top: 5,
+import splitDigits from '../utils/splitDigits';
+import { t } from '../intl/helper';
+
+const MIN_SCALE = -1;
+const MAX_SCALE = 1;
+export const SHIFT_SCALE = 1;
+export const MIN_YEAR = 1918;
+const MAX_YEAR = 1960;
+
+export const COEFFICIENT =
+  (MAX_YEAR - MIN_YEAR) / (MAX_SCALE + SHIFT_SCALE - (MIN_SCALE + SHIFT_SCALE));
+
+export const MARGIN = {
+  top: 1,
   right: 25,
-  bottom: 50,
+  bottom: 30,
   left: 15
 };
 
-export const chartData = [
+export const CHART_DATA = [
   {
     year: 1918,
     prisoners: 0,
@@ -222,3 +234,15 @@ export const chartData = [
     dead: 0
   }
 ];
+
+export const CHART_STATS = CHART_DATA.reduce(
+  (acc, { year, prisoners, dead }) => {
+    acc[year] = {
+      prisoners: prisoners > 0 ? splitDigits(prisoners) : t('noData'),
+      dead: dead > 0 ? splitDigits(dead) : t('noData')
+    };
+
+    return acc;
+  },
+  {}
+);
